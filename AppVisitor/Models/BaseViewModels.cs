@@ -1,6 +1,6 @@
 ﻿namespace AppVisitor.Models;
 
-public class Eletronico
+public class BaseViewModels
 {
     
 }
