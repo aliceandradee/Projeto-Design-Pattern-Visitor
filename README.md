@@ -21,7 +21,7 @@ Este projeto foi desenvolvido como parte da atividade de Situação de Aprendiza
 ---
 
 ##  Objetivo do meu projeto:
-
+Este projeto é um sistema de Gestão de Tarefas e Usuários desenvolvido em C# (WPF), com o objetivo principal de demonstrar a aplicação prática de padrões de projeto (Design Patterns) e arquitetura de software moderna. Nessa aplicação foi utilizada o padrão MVVM (Model-View-ViewModel) para garantir uma separação clara entre a interface visual e a lógica de negócio e a implementação do padrão Visitor, que permite a criação de funcionalidades extensíveis como a geração de relatórios detalhados , sem a necessidade de modificar as classes principais de dados (Tarefa e Usuario), garantindo um código limpo, modular e de fácil manutenção.
 
 
 ##  Tecnologias Utilizadas
