@@ -1,7 +1,10 @@
 # Projeto Design Pattern Visitor
-Este projeto foi desenvolvido como parte da atividade de Situação de Aprendizagem para a disciplina de Desenvolvimento de Sistemas. O objetivo principal é demonstrar a implementação prática do padrão de projeto Visitor, utilizando a arquitetura MVVM em uma aplicação WPF (C#).
+Este projeto foi desenvolvido como parte da atividade de Situação de Aprendizagem para a disciplina de Desenvolvimento de Sistemas. O objetivo principal é demonstrar a implementação prática do padrão de projeto Visitor, utilizando a arquitetura MVVM em uma aplicação WPF (C#).Onde devem representar soluções consolidadas para problemas recorrentes na engenharia de software, sendo amplamente aplicados em sistemas modernos.
 
 ---
+
+##  Tecnologias Utilizadas
+
 ##  Tecnologias Utilizadas
 
 - Linguagem: C#;
@@ -467,3 +470,10 @@ Após o padrão Visitor processar todas as tarefas e usuários, a interface é r
     </Grid>
 </Window>
 ```
+
+---
+
+##  Referências Bibliográficas
+
+- https://refactoring.guru/design-patterns/visitor
+- https://www.geeksforgeeks.org/system-design/visitor-design-pattern/
