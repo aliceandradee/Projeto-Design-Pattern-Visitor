@@ -105,7 +105,7 @@ A pasta Data é a parte mais importante do projeto, sendo responsável por isola
 
 Além disso, é aqui que reside a inteligência do padrão Visitor aplicada à geração de informações: o RelatorioVisitor.cs utiliza os dados brutos vindos do banco para transformá-los em um produto final formatado, provando que podemos estender as funcionalidades do sistema sem poluir nossos modelos originais. E consigo pegar a linguagem escolhida que é o Visitor.
 
-BaseViewModel:
+## BaseViewModel:
 
 ```
 using System.ComponentModel;
@@ -123,7 +123,7 @@ public class BaseViewModel : INotifyPropertyChanged
 ```
 ---
 
-DataBase:
+## DataBase:
 
 ```
 using System;
@@ -176,7 +176,7 @@ public static class DataBase
 }
 ```
 
-RelatorioVisitor:
+## RelatorioVisitor:
 
 ```
 using System.Text;
@@ -208,7 +208,7 @@ public class RelatorioVisitor : IVisitor
 }
 ```
 ---
-TarefaRepository:
+## TarefaRepository:
 ```
 using System;
 using System.Collections.Generic;
@@ -258,7 +258,7 @@ public class TarefaRepository
 }
 ```
 ---
-UsuarioRepository:
+## UsuarioRepository:
 ```
 using System;
 using Microsoft.Data.Sqlite;
@@ -293,7 +293,7 @@ public class UsuarioRepository
 A pasta Model implementa a interface IElement, o que significa que cada objeto de modelo "abre suas portas" para ser visitado por um consultor externo (o Visitor). Essa abordagem é o que permite que o sistema seja extensível: se amanhã precisarmos de um exportador para Excel ou um calculador de prazos, não precisaremos alterar uma única linha de código dentro das classes Tarefa ou Usuario; basta criar um novo Visitor que saiba como interagir com elas através do método Accept.
 
 ---
-IVisitor:
+## IVisitor:
 ```
 namespace AppVisitor.Models;
 
@@ -308,7 +308,7 @@ public interface IElement {
 ```
 
 ---
-Tarefa:
+## Tarefa:
 ```
 namespace AppVisitor.Models;
 public class Tarefa : IElement {
@@ -323,7 +323,7 @@ public class Tarefa : IElement {
 ```
 
 ---
-Usuario:
+## Usuario:
 ```
 namespace AppVisitor.Models;
 public class Usuario : IElement {
