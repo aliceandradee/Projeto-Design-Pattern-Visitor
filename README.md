@@ -496,3 +496,4 @@ Após o padrão Visitor processar todas as tarefas e usuários, a interface é r
 
 - https://refactoring.guru/design-patterns/visitor
 - https://www.geeksforgeeks.org/system-design/visitor-design-pattern/
+- https://medium.com/@jonesroberto/design-patterns-parte-25-visitor-159f8fc14e56
