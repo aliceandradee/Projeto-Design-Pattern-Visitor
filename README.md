@@ -310,3 +310,154 @@ public class Usuario : IElement {
     public void Accept(IVisitor visitor) => visitor.VisitUsuario(this);
 }
 ```
+
+##  Interface e entrega final do projeto
+
+A interface foi desenvolvida em XAML dentro do framework WPF. 
+
+A interface do AppVisitor desempenha quatro funções principais:
+
+* Captura de Dados (Entrada):
+Através de campos de texto (TextBox), ela recebe o nome do usuário, o título da tarefa e a descrição. Graças ao UpdateSourceTrigger=PropertyChanged, cada letra digitada já é enviada para a ViewModel em tempo real.
+
+* Execução de Ações (Comandos):
+Os botões não chamam funções diretamente; eles disparam Commands.
+
+Botão Salvar: Envia os dados para o Repositório e atualiza o banco SQLite.
+
+Botão Gerar Relatório: É o gatilho que inicia a "viagem" do Visitor por todos os itens da lista.
+
+* Exibição Dinâmica (DataGrid):
+A tabela central utiliza uma ObservableCollection. Isso faz com que a interface se atualize sozinha: assim que você salva uma tarefa no banco de dados, ela aparece na lista sem que você precise "atualizar" a página.
+
+* Apresentação do Resultado do Visitor:
+Após o padrão Visitor processar todas as tarefas e usuários, a interface é responsável por exibir o resultado final (o relatório formatado) através de um componente visual (como um MessageBox), transformando dados brutos do banco em informação legível.
+
+---
+
+```
+<Window x:Class="AppVisitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gerenciador de Tarefas Profissional - Visitor Pattern" 
+        Height="700" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F6FA">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#2F3640"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#DCDDE1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,25">
+            <TextBlock Text="ORGANIZAÇÃO PESSOAL" FontSize="24" FontWeight="ExtraBold" Foreground="#192A56" Margin="0"/>
+            <TextBlock Text="Padrão de Projeto Visitor com MVVM" FontSize="12" Foreground="#718093" Margin="0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="20" Margin="0,0,0,30">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="270" Opacity="0.1" ShadowDepth="2"/>
+            </Border.Effect>
+            
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                        <TextBlock Text="Usuário Responsável"/>
+                        <TextBox Text="{Binding NomeUsuario, UpdateSourceTrigger=PropertyChanged}" Tag="Ex: João Silva"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="Título da Tarefa"/>
+                        <TextBox Text="{Binding Titulo, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Descrição Detalhada"/>
+                <TextBox Text="{Binding Conteudo, UpdateSourceTrigger=PropertyChanged}" Height="60" VerticalContentAlignment="Top" AcceptsReturn="True"/>
+
+                <UniformGrid Columns="2" Margin="0,20,0,0">
+                    <Button Content="💾 SALVAR TAREFA" 
+                            Style="{StaticResource ModernButton}"
+                            Command="{Binding SalvarCommand}" 
+                            Background="#273C75" Margin="0,0,10,0"/>
+
+                    <Button Content="📊 GERAR RELATÓRIO (VISITOR)" 
+                            Style="{StaticResource ModernButton}"
+                            Command="{Binding GerarRelatorioCommand}" 
+                            Background="#44BD32" Margin="10,0,0,0"/>
+                </UniformGrid>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" CornerRadius="8" Background="White" BorderThickness="0">
+            <DataGrid ItemsSource="{Binding Tarefas}" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      RowHeight="40"
+                      ColumnHeaderHeight="45"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="#F1F2F6"
+                      FontSize="14">
+                
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#F1F2F6"/>
+                        <Setter Property="Foreground" Value="#2F3640"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Padding" Value="10,0,0,0"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                        <Setter Property="BorderBrush" Value="#DCDDE1"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tarefa" Binding="{Binding Titulo}" Width="*"/>
+                    <DataGridCheckBoxColumn Header="Concluída" Binding="{Binding Concluida}" Width="100"/>
+                    <DataGridTextColumn Header="Prazo" Binding="{Binding Data_Limite, StringFormat=d}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Window>
+```
