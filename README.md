@@ -40,24 +40,30 @@ Este projeto é um sistema de Gestão de Tarefas e Usuários desenvolvido em C# 
 
 ```mermaid
 graph TD
-    subgraph Camada_View
+    subgraph Camada_View [🎨 View - WPF/XAML]
         MW[MainWindow.xaml]
     end
     
-    subgraph Camada_ViewModel
+    subgraph Camada_ViewModel [⚙️ ViewModel]
         MVM[MainViewModel.cs]
         RC[RelayCommand.cs]
     end
     
-    subgraph Padrao_Visitor
-        IV[IVisitor Interface] --> CV[CalculadoraImpostoVisitor]
-        IE[IElement Interface] --> Prod[Produtos: Livro / Eletronico]
+    subgraph Padrao_Visitor [🕵️ Padrão Visitor]
+        IV[IVisitor Interface] --> RV[RelatorioVisitor.cs]
+        IE[IElement Interface] --> Models[Models: Tarefa / Usuario]
+    end
+
+    subgraph Camada_Data [🗄️ Persistência]
+        REP[Repositories] --> DB[(SQLite)]
     end
     
-    MW -->|Binding| MVM
-    MVM -->|Usa| RC
-    MVM -->|Executa| CV
-    CV -->|Visita| Prod
+    %% Relacionamentos
+    MW -->|Binding / DataContext| MVM
+    MVM -->|Commands| RC
+    MVM -->|Gera Relatório via| RV
+    MVM -->|Busca Dados| REP
+    RV -->|Visita & Formata| Models
 ```
 ---
 
