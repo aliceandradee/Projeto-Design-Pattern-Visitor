@@ -19,14 +19,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-         this.DataContext = new AppVisitor.ViewModels.MainViewModel();
     }
 }
 
-public class ViewModels
-{
-    public class MainViewModel
-    {
-    }
-}
+
+
 
