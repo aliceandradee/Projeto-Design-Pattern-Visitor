@@ -266,3 +266,47 @@ public class UsuarioRepository
 ```
 ---
 
+##  Estrutura do Projeto - Models/IVistor, Tarefa e Usuario
+
+A pasta Model implementa a interface IElement, o que significa que cada objeto de modelo "abre suas portas" para ser visitado por um consultor externo (o Visitor). Essa abordagem é o que permite que o sistema seja extensível: se amanhã precisarmos de um exportador para Excel ou um calculador de prazos, não precisaremos alterar uma única linha de código dentro das classes Tarefa ou Usuario; basta criar um novo Visitor que saiba como interagir com elas através do método Accept.
+
+---
+IVisitor:
+```
+namespace AppVisitor.Models;
+
+public interface IVisitor {
+    void VisitTarefa(Tarefa tarefa);
+    void VisitUsuario(Usuario usuario);
+}
+
+public interface IElement {
+    void Accept(IVisitor visitor);
+}
+```
+
+---
+Tarefa:
+```
+namespace AppVisitor.Models;
+public class Tarefa : IElement {
+    public int Id_Tarefa { get; set; }
+    public string Titulo { get; set; }
+    public string Conteudo { get; set; }
+    public bool Concluida { get; set; }
+    public DateTime? Data_Limite { get; set; }
+    public int? Fk_Usuario_Id { get; set; }
+    public void Accept(IVisitor visitor) => visitor.VisitTarefa(this);
+}
+```
+
+---
+Usuario:
+```
+namespace AppVisitor.Models;
+public class Usuario : IElement {
+    public int Id_Usuario { get; set; }
+    public string Nome { get; set; }
+    public void Accept(IVisitor visitor) => visitor.VisitUsuario(this);
+}
+```
