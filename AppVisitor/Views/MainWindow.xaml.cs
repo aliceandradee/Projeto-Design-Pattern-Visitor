@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AppVisitor.ViewModels;
 
 namespace AppVisitor;
 
@@ -19,6 +20,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        this.DataContext = new TarefaViewModel();
     }
 }
 
