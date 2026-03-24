@@ -3,7 +3,26 @@ Este projeto foi desenvolvido como parte da atividade de Situação de Aprendiza
 
 ---
 
-##  Tecnologias Utilizadas
+##  O que é o Design Pattern - Visitor:
+
+É um método de programação orientada a objetos (POO) chamado padrão de projeto Visitor que permite adicionar novas operações a classes preexistentes sem alterá-las. O padrão de projeto Visitor é um padrão comportamental que permite a adição de novas operações a classes existentes sem modificar sua estrutura. Ele separa os algoritmos dos objetos sobre os quais operam, melhorando a modularidade e a manutenibilidade.
+
+---
+##  Vantagens e desvantagens do Design Pattern - Visitor:
+
+| Vantagens | Desvantagens |
+| :--- | :--- |
+| **Separação de Responsabilidades:** Mantém as operações separadas dos objetos, facilitando o gerenciamento e a compreensão. | **Complexidade Adicional:** Pode tornar o código mais complicado com o aumento de tipos de objetos ou operações. |
+| **Facilidade para Novos Recursos:** Introduz novas operações criando visitantes sem a necessidade de alterar as classes dos objetos. | **Dificuldade em Novos Objetos:** Introduzir novos tipos de objetos exige alterações em todas as classes de visitantes existentes. |
+| **Lógica Centralizada:** Operações concentradas em um só lugar ajudam a visualizar interações e simplificam a manutenção. | **Acoplamento Rígido:** Os visitantes precisam conhecer todos os tipos de objetos específicos, criando dependências fortes. |
+| **Segurança de Tipo:** Cada método de visitante é específico para um tipo de objeto, ajudando a detectar erros precocemente. | **Mais Classes para Gerenciar:** O padrão pode levar a um excesso de interfaces e classes extras na base de código. |
+| **Manutenção Simplificada:** Permite atualizar ou corrigir lógicas na classe Visitor sem mexer na estrutura estável dos objetos. | **Inadequado para Mudanças Frequentes:** Se os tipos de objetos mudam muito, o padrão gera um alto custo de atualização. |
+
+---
+
+##  Objetivo do meu projeto:
+
+
 
 ##  Tecnologias Utilizadas
 
