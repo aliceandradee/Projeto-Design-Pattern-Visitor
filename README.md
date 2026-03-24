@@ -335,6 +335,12 @@ Após o padrão Visitor processar todas as tarefas e usuários, a interface é r
 
 ---
 
+<div align="center">
+<img src="imagens/interface - visitor.png" alt="Descrição" width="800"/>
+</div>
+
+---
+
 ```
 <Window x:Class="AppVisitor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
